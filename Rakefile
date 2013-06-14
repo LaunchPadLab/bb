@@ -5,6 +5,7 @@ require 'bubble-wrap'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
-  app.name = 'BB'
+  app.name = "The BB"
   app.fonts = ["Inconsolata.ttf"]
+  app.icons = ["icon.png"]
 end
