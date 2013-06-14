@@ -2,11 +2,9 @@ class RecipesController < UIViewController
   
   attr_accessor :recipes
   
-  def initWithRecipes
-    initWithNibName(nil, bundle: nil)
-    self.recipes = Recipe.find_all(self) do |recipe|
-      puts 'hello'
-    end
+  def initWithRecipes(recipes)
+    initWithNibName(nil, bundle:nil)
+    self.recipes = recipes
     self
   end
   
@@ -44,9 +42,13 @@ class RecipesController < UIViewController
    
    def tableView(tableView, didSelectRowAtIndexPath:indexPath)
      tableView.deselectRowAtIndexPath(indexPath, animated: true)
+     
+     selected_recipe = self.recipes[indexPath.row]
+     
+     Recipe.find(selected_recipe) do |recipe|
+       self.navigationController.pushViewController(RecipeDetailController.alloc.initWithRecipe(recipe), animated:true)       
+     end
 
-     self.navigationController.pushViewController(RecipeDetailController.alloc.initWithRecipe(self.recipes[indexPath.row][:name]), animated:true)
-     self.navigationController.navigationBar.tintColor = UIColor.blackColor
    end
 
 end

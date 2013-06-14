@@ -1,22 +1,25 @@
 class RecipeDetailController < UIViewController
   
-  attr_accessor :name
+  attr_accessor :recipe
   
-  def initWithRecipe(name)
+  def initWithRecipe(recipe)
     initWithNibName(nil, bundle: nil)
-    self.name = name
+    self.recipe = recipe
     self    
   end
   
   def viewDidLoad
     super
     
-    self.title = self.name
+    self.title = self.recipe[:name]
     self.view.backgroundColor = UIColor.whiteColor
+
+    label = UITextView.alloc.initWithFrame([[10, 10], [300, 100]])
+    label.text = "Tasting Notes: #{self.recipe[:tasting_notes]}"
+    label.backgroundColor = UIColor.clearColor
+    label.center = [self.view.frame.size.width / 2, 100]
+    self.view.addSubview(label)
     
   end
-  
-  
-  
   
 end
