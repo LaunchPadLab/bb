@@ -2,22 +2,28 @@ class RecipesController < UIViewController
   
   attr_accessor :recipes
   
-  def initWithRecipes(recipes)
-    initWithNibName(nil, bundle:nil)
-    self.recipes = recipes
-    self
-  end
-  
   def viewDidLoad
      super
      
      self.title = "Recipes"
+     self.view.backgroundColor = UIColor.whiteColor
      
-     @table = UITableView.alloc.initWithFrame(self.view.bounds)
-     self.view.addSubview @table
+     navigationItem.leftBarButtonItem = UIBarButtonItem.alloc.initWithTitle("=", style:UIBarButtonItemStylePlain, target:self, action:"showMenu")
+
+     @loading = UIActivityIndicatorView.alloc.initWithActivityIndicatorStyle(UIActivityIndicatorViewStyleGray)
+     @loading.frame = [[0, 0], [self.view.bounds.size.width, 100]]
+     @loading.startAnimating
+     self.view.addSubview(@loading)
      
-     @table.dataSource = self
-     @table.delegate = self
+     Recipe.find_all do |recipes|
+       self.recipes = recipes
+       @loading.stopAnimating
+       @loading.removeFromSuperview
+       @table = UITableView.alloc.initWithFrame([[0, 0], [self.view.bounds.size.width, self.view.bounds.size.height]], style:UITableViewStylePlain)
+       self.view.addSubview @table
+       @table.dataSource = self
+       @table.delegate = self
+     end
      
    end
    
@@ -44,11 +50,12 @@ class RecipesController < UIViewController
      tableView.deselectRowAtIndexPath(indexPath, animated: true)
      
      selected_recipe = self.recipes[indexPath.row]
-     
-     Recipe.find(selected_recipe) do |recipe|
-       self.navigationController.pushViewController(RecipeDetailController.alloc.initWithRecipe(recipe), animated:true)       
-     end
+     self.navigationController.pushViewController(RecipeDetailController.alloc.initWithRecipe(selected_recipe), animated:true)
 
    end
-
+   
+   def showMenu
+     App.delegate.slideMenuButtonTouched(self)
+   end
+   
 end

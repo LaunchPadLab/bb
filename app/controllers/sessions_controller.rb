@@ -60,7 +60,7 @@ class SessionsController < UIViewController
     self.view.addSubview(login_button)
     
     login_button.addTarget(self, action: 'sign_in', forControlEvents:UIControlEventTouchUpInside)
-  
+
   end
   
   def set_background_color(color)
@@ -70,13 +70,11 @@ class SessionsController < UIViewController
   
   def sign_in
     # User.sign_in({ email: @email_field.text, password: @password_field.text })
-
-    Recipe.find_all do |recipes|
-      self.navigationController.pushViewController(RecipesController.alloc.initWithRecipes(recipes), animated:true)
-      self.navigationController.navigationBarHidden = false
-      self.navigationController.navigationBar.tintColor = UIColor.blackColor
-      self.navigationController.navigationBar.items.each { |item| item.hidesBackButton = true }
-    end
+    
+    self.navigationController.pushViewController(RecipesController.alloc.initWithNibName(nil, bundle:nil), animated:true)
+    self.navigationController.navigationBarHidden = false
+    self.navigationController.navigationBar.tintColor = UIColor.blackColor
+    self.navigationController.navigationBar.items.each { |item| item.hidesBackButton = true }
   end
   
 end
