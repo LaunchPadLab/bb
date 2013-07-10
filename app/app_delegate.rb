@@ -23,7 +23,7 @@ class AppDelegate
   def slideMenuButtonTouched(controller)
     viewSize = controller.view.bounds.size
 
-    UIGraphicsBeginImageContextWithOptions(viewSize, false, 1.0)
+    UIGraphicsBeginImageContextWithOptions(viewSize, false, 0.0)
     controller.view.layer.renderInContext(UIGraphicsGetCurrentContext())
 
     image = UIGraphicsGetImageFromCurrentImageContext()

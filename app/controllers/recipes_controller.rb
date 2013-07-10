@@ -8,7 +8,7 @@ class RecipesController < UIViewController
      self.title = "Recipes"
      self.view.backgroundColor = UIColor.whiteColor
      
-     navigationItem.leftBarButtonItem = UIBarButtonItem.alloc.initWithTitle("=", style:UIBarButtonItemStylePlain, target:self, action:"showMenu")
+     # navigationItem.leftBarButtonItem = UIBarButtonItem.alloc.initWithTitle("=", style:UIBarButtonItemStylePlain, target:self, action:"showMenu")
 
      @loading = UIActivityIndicatorView.alloc.initWithActivityIndicatorStyle(UIActivityIndicatorViewStyleGray)
      @loading.frame = [[0, 0], [self.view.bounds.size.width, 100]]
