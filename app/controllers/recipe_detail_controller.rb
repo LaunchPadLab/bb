@@ -62,14 +62,14 @@ class RecipeDetailController < UIViewController
       ibu.backgroundColor = UIColor.clearColor
       self.view.addSubview(ibu) 
       
-      detail_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-      detail_button.setTitle('See the full recipe', forState:UIControlStateNormal)
-      detail_button.setTitle('Loading...', forState:UIControlStateDisabled)
-      detail_button.sizeToFit
-      detail_button.frame = [[60, 300], [200, 30]]
-      self.view.addSubview(detail_button)
-
-      detail_button.addTarget(self, action: 'load_full_recipe', forControlEvents:UIControlEventTouchUpInside)
+      # detail_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+      # detail_button.setTitle('See the full recipe', forState:UIControlStateNormal)
+      # detail_button.setTitle('Loading...', forState:UIControlStateDisabled)
+      # detail_button.sizeToFit
+      # detail_button.frame = [[60, 300], [200, 30]]
+      # self.view.addSubview(detail_button)
+      # 
+      # detail_button.addTarget(self, action: 'load_full_recipe', forControlEvents:UIControlEventTouchUpInside)
       
     end
   end
@@ -83,7 +83,11 @@ class RecipeDetailController < UIViewController
   def load_full_recipe
     url_string = "#{API.url}recipes/#{self.recipe[:id]}"
     url = NSURL.alloc.initWithString(url_string)
-    UIApplication.sharedApplication.openURL(url)
+    request = NSURLRequest.alloc.initWithURL(url)
+    # UIApplication.sharedApplication.openURL(url)
+    
+    self.navigationController.pushViewController(FullRecipeController.alloc.initWithRequest(request), animated:true)
+    self.navigationController.navigationBar.tintColor = UIColor.blackColor
   end
   
 end
