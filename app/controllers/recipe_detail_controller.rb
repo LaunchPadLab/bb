@@ -62,14 +62,14 @@ class RecipeDetailController < UIViewController
       ibu.backgroundColor = UIColor.clearColor
       self.view.addSubview(ibu) 
       
-      # detail_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-      # detail_button.setTitle('See the full recipe', forState:UIControlStateNormal)
-      # detail_button.setTitle('Loading...', forState:UIControlStateDisabled)
-      # detail_button.sizeToFit
-      # detail_button.frame = [[60, 300], [200, 30]]
-      # self.view.addSubview(detail_button)
-      # 
-      # detail_button.addTarget(self, action: 'load_full_recipe', forControlEvents:UIControlEventTouchUpInside)
+      detail_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+      detail_button.setTitle('See the full recipe', forState:UIControlStateNormal)
+      detail_button.setTitle('Loading...', forState:UIControlStateDisabled)
+      detail_button.sizeToFit
+      detail_button.frame = [[60, 300], [200, 30]]
+      self.view.addSubview(detail_button)
+      
+      detail_button.addTarget(self, action: 'load_full_recipe', forControlEvents:UIControlEventTouchUpInside)
       
     end
   end

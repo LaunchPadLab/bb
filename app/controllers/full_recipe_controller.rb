@@ -16,6 +16,7 @@ class FullRecipeController < UIViewController
     
     web_view = UIWebView.alloc.initWithFrame([[0,0], [self.view.frame.size.width, self.view.frame.size.height]])
     web_view.loadRequest(self.request)
+    web_view.scalesPageToFit = true
     self.view.addSubview(web_view)
     
   end
